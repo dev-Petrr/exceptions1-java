@@ -30,10 +30,19 @@ public class Reservation {
         //converte diff que estava em milissegundos para dias.
 
     }
-    public void updateDates(Date checkIn, Date checkOut){
+    public String updateDates(Date checkIn, Date checkOut){
+
+        Date now = new Date();
+        if (checkIn.before(now) || checkOut.before(now)) {
+            return "Error in reservation;";
+        }
+        if (!checkOut.after(checkIn)) {
+            return "Error in reservation: Check-out must be after Check-in.";
+        }
+
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        //O atributo da classe, receber o parâmetro.
+        return null;
     }
     @Override
     public String toString(){
